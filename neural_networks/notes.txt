@@ -1,0 +1,6 @@
+Differences between Tensors, Arrays and Vectors:
+
+In general tensors, arrays and vectors are really simmilar and can be used interchangably, although there are some important differences.
+
+	1. Arrays are homologous. Here is an example: list = [[4,2,3],[1,2,3]]. The list here can treated as an array, because the elements
+	that a part of it are the same in size. If they were not as in: not_array = [[4,2,3],[1,2]], it will not be considered homogolous 
