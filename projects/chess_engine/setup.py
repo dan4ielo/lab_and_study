@@ -2,17 +2,25 @@
 
 class Board():
 
+    def generate_board(self):
+        board = []
+        colour_counter = 1
+        for rank in self.ranks:
+            for __file in self.files:
+                if colour_counter % 2 == 0:
+                    board.append([__file, rank, 'white'])
+                    colour_counter = colour_counter + 1
+                else:
+                    board.append([__file, rank, 'black'])
+                    colour_counter = colour_counter + 1
+        return board
+
     def __init__(self):
-        self.coordinates = [
-                ['a','b','c','d','e','f','g','h'],  # 1
-                ['a','b','c','d','e','f','g','h'],  # 2
-                ['a','b','c','d','e','f','g','h'],  # 3
-                ['a','b','c','d','e','f','g','h'],  # 4
-                ['a','b','c','d','e','f','g','h'],  # 5
-                ['a','b','c','d','e','f','g','h'],  # 6
-                ['a','b','c','d','e','f','g','h'],  # 7
-                ['a','b','c','d','e','f','g','h']   # 8
-            ]
+        self.ranks = [1, 2, 3, 4, 5, 6, 7, 8]
+        self.files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+        self.board = self.generate_board()
+       
+    def read_algebraic_notation
 
 class Piece(): 
 
