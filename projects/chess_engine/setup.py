@@ -21,7 +21,14 @@ class Board():
         self.board = self.generate_board()
        
     def read_notation(self):
+        # K - king
+        # Q - queen
+        # R - rook
+        # B - Bishop
+        # _ - pawn - pawns don't have an encopding. Moving a pawn is done through the target square
         pass
+
+    # Can I implement moves of the pieces as decorators of a general move function???
 
 class Piece(): 
 
@@ -42,7 +49,7 @@ class Piece():
     def check_for_moves(self):
         pass
 
-# A question stands with how do I check fo other pieces. I can with checking if a square is ocupied or not.
+# A question stands with how do I check for other pieces. I can with checking if a square is ocupied or not.
 # But to that I need a way to accesss each square on the board and assign it a value that shows whether or not 
 # it is ocupied. Now how do I do that?
 
@@ -51,7 +58,7 @@ class Piece():
 
 class Pawn(Piece):
     
-    def __init__(self, pos_rank = 0, pos_file = 0, col = 'white'):
+    def __init__(self, pos_rank = 0, pos_file = 0, col = "white"):
         super().__init__(pos_rank, pos_file, col)
     
     def get_position(self):
@@ -61,7 +68,7 @@ class Pawn(Piece):
         return pos_list
 
     def check_for_moves(self):
-        if (self.colour=='white'):
+        if (self.colour=="white"):
             self.pos = self.get_position()  # Shows as a list [row,file]
             
             print(self.pos)
@@ -71,6 +78,60 @@ class Pawn(Piece):
     def move():
         check_moves()   # check what moves are available, then make a decisionm (move/take)
         pass
+
+class Knight(Piece):
+    def __init__(self, pos_rank = 0, pos_file = 0, col = "white"):
+        super().__init__(pos_rank, pos_file, col)
+        
+    def get_position(self):
+        pos_list = []
+        pos_list.append(self.position_rank)
+        pos_list.append(self.position_file)
+        return pos_list
+
+class Bishop(Piece):
+    
+    def __init__(self, pos_rank = 0, pos_file = 0, col = "white"):
+        super().__init__(pos_rank, pos_file, col)
+    
+    def get_position(self):
+        pos_list = []
+        pos_list.append(self.position_rank)
+        pos_list.append(self.position_file)
+        return pos_list
+
+class Rook(Piece):
+    
+    def __init__(self, pos_rank = 0, pos_file = 0, col = "white"):
+        super().__init__(pos_rank, pos_file, col)
+    
+    def get_position(self):
+        pos_list = []
+        pos_list.append(self.position_rank)
+        pos_list.append(self.position_file)
+        return pos_list
+
+class Queen(Piece):
+    
+    def __init__(self, pos_rank = 0, pos_file = 0, col = "white"):
+        super().__init__(pos_rank, pos_file, col)
+    
+    def get_position(self):
+        pos_list = []
+        pos_list.append(self.position_rank)
+        pos_list.append(self.position_file)
+        return pos_list
+
+class King(Piece):
+    
+    def __init__(self, pos_rank = 0, pos_file = 0, col = "white"):
+        super().__init__(pos_rank, pos_file, col)
+    
+    def get_position(self):
+        pos_list = []
+        pos_list.append(self.position_rank)
+        pos_list.append(self.position_file)
+        return pos_list
 
 # Note: the board can be expressed as list of lists, where each subsequent list is a row 
 

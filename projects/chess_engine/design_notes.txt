@@ -1,0 +1,8 @@
+Some questions:
+	-	How many files should I have?
+	-	Focus on only one asspect at a time
+	-	What exactly is the purpose of each file?
+
+setup.py
+	Setup.py is supposed to be a file used for setting up a board that can be used for playing. This includes initial position of the pieces, drawing of the objects and ... maybe that's all there is to the file. I could incorporate some methods that can be used later on from other files. Question is: What methods can I concider to be part of the setup? Is moving part of it or should I move it to a different file? Maybe I can make a file named moves.py that is onlky conserned with the movement logic of the game and the setup is going to be only the notaion part of it. Or is the notation [art of the moves? Maybe it is.
+	How do I structure the notation - as a CSV? Maybe I can use a dataframe from pandas. With an idea for upscaling in the future to be able to test multiple games at once for the neural network that I would write .. eventually. 
