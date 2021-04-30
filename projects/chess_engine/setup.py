@@ -20,7 +20,8 @@ class Board():
         self.files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
         self.board = self.generate_board()
        
-    def read_algebraic_notation
+    def read_notation(self):
+        pass
 
 class Piece(): 
 
