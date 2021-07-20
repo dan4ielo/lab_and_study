@@ -9,9 +9,11 @@ def get_names(source):
     lines = source.readlines()
 
     for line in lines:
-        old_names.append(line.split(" . ")[0])
-        new_names.append(line.split(" . ")[1])
-
+        try:
+            old_names.append(line.split(" . ")[0])
+            new_names.append(line.split(" . ")[1])
+        except IndexError:
+            continue
     return old_names, new_names # two lists containing the old names and the new ones
 
 source = input("Please specify a source file: ")
@@ -23,5 +25,8 @@ current_directory = os.getcwd()
 
 print (current_directory)
 
-# os.rename(src = current_directory + "/" + old_names[1], dst = current_directory + "/" + new_names[1])
-os.replace(src = current_directory + "/" + old_names[1], dst = current_directory + "/" + new_names[1])
+destination = current_directory + "/" + new_names[2]
+os.rename(src = current_directory + "/" + old_names[2], dst = destination)
+# os.replace(src = current_directory + "/" + old_names[1], dst = current_directory + "/" + new_names[1])
+# os.rename(src = current_directory + "/1.py", dst = current_directory + "/1_A-good-first-program.py")
+
