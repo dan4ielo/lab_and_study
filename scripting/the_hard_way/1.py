@@ -1,0 +1,8 @@
+print ("Hello, world")
+print ("Hello, again")
+print ('I find this typing a bit pointless :D')
+print ("Just a tiny bit annoying")
+print ("Yay! what a fun excersize")
+print ("Are you certain?")
+print ("Please don't do it")
+print ("I said: 'DON'T'")
