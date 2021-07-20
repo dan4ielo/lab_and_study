@@ -9,9 +9,11 @@ def get_names(source):
     lines = source.readlines()
 
     for line in lines:
-        old_names.append(line.split(" . ")[0])
-        new_names.append(line.split(" . ")[1])
-
+        try:
+            old_names.append(line.split(" . ")[0])
+            new_names.append(line.split(" . ")[1])
+        except IndexError:
+            continue
     return old_names, new_names # two lists containing the old names and the new ones
 
 source = input("Please specify a source file: ")
