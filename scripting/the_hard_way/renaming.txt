@@ -1,0 +1,32 @@
+1.py . 1_A-good-first-progam.py
+2.py . 2_Comments-and-pound-characters.py
+3.py . 3_Numbers-and-math.py
+4.py . 4_Variables-and-names.py
+5.py . 5_More-variables-and-printing.py
+6.py . 6_Strings-and-text.py
+7.py . 7_More-printing.py
+8.py . 8_Printing-printing.py
+9.py . 9_Printing-printing-printing.py
+
+10.py . 10_What-was-that.py
+11.py . 11_Asking-questions.py
+12.py . 12_Prompting-people.py
+13.py . 13_Parameters-unpacking-variables.py
+14.py . 14_Prompting-and-passing.py
+15.py . 15_Reading-files.py
+16.py . 16_Reading-and-writing-files.py
+17.py . 17_More-files.py
+18.py . 18_Names-variables-code-functions.py
+19.py . 19_Functions-and-variables.py
+
+20.py . 20_Functions-and-files.py
+21.py . 21_Functions-can-return-something.py
+24.py . 24_More-practice.py
+25.py . 25_Even-more-practice.py
+28.py . 28_Boolean-practice.py
+29.py . 29_What-if.py
+
+30.py . 30_Else-and-if.py
+31.py . 31_Making-decisions.py
+32.py . 32_Loops-and-lists.py
+
