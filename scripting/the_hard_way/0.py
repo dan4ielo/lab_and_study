@@ -25,8 +25,13 @@ current_directory = os.getcwd()
 
 print (current_directory)
 
-destination = current_directory + "/" + new_names[2]
-os.rename(src = current_directory + "/" + old_names[2], dst = destination)
-# os.replace(src = current_directory + "/" + old_names[1], dst = current_directory + "/" + new_names[1])
+# Only option for now that does produce a good output
+
 # os.rename(src = current_directory + "/1.py", dst = current_directory + "/1_A-good-first-program.py")
+
+# All of the options below produce wierd symbols and mess up the naming
+
+# destination = current_directory + "/" + new_names[2]
+# os.rename(src = current_directory + "/" + old_names[2], dst = destination)
+# os.replace(src = current_directory + "/" + old_names[1], dst = current_directory + "/" + new_names[1])
 
