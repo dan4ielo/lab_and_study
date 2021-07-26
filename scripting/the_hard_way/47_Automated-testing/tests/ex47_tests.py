@@ -1,11 +1,14 @@
+# Sample skeleton file for tests
+
 from nose.tools import *
 import ex47
 
 def setup():
-    print ("SETUP!")
+    print ("SETUP")
 
 def teardown():
     print ("TEAR DOWN!")
 
 def test_basic():
-    print ("I RAN!")
+    print ("I RAN")
+
