@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% if greeting %}
+    I just wanted to say
+    <em style="color: green; font-size: 2em;">{{ greeting }}</em>
+{% else %}
+    <em>hello</em>, world!
+{% endif %}
+
+<br/>
+<a href="{{ url_for('index') }}">Back to form</a>
+
+{% endblock %}
