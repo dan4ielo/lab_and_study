@@ -16,8 +16,8 @@
 #   - start_pos()   - start from a given position - useful for puzzles
 
 # class Piece:
-#   *_file          - the x coordinates of the object (between a and h)
-#   *_rank          - the y coordinates of the object (between 1 and 8)
+#   *file          - the x coordinates of the object (between a and h)
+#   *rank          - the y coordinates of the object (between 1 and 8)
 #   *COLOR          - enum value that shows a piece's color
 #   - location()    - get the location of the piece; returns the coordinates
 # of the piece
@@ -39,15 +39,43 @@
 # end of game signal if no moves are possible to def the king
 #   - end_game()    - ends the game
 
+class InvalidMove(Exception);
+    pass
+
 class Engine():
     start():
         pass
 
 class Piece():
-    pass
+    colors = ['white', 'black']
+    self.file = 0  # between a and h
+    self.rank = 0  # between 1 and 8
+    COLOR = enumerate(colors)  # COLOR[0] = white; COLOR[1] = black
+    
+    def check_values(self, file, rank):
+        if file <
+
+    def __init__(self):
+        print ('You need to select an actual piece.')
+
+    def location(self):
+        return (self.file, str(self.rank))  # return a tuple ('a', '1')
+
+    def check_move(self):  # An empty function to be inherited
+        pass 
+
+    def move(self, target):  # Move the piece at the target square 
+        if target in check_move():
+            self.file = target[0]
+            self.rank = target[1]
+            return (self.file, str(self.rank))
+        else:
+            raise InvalidMove('This is not a legal move')
 
 class Pawn(Piece):
-    pass
+    
+    def __init__(self, file, rank):
+        self.check_values(file, rank)
 
 class Knight(Piece):
     pass
