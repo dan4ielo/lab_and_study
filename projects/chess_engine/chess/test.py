@@ -5,3 +5,8 @@ class Test():
 
 test = Test('test')
 
+def returning():
+    return 10, 20
+
+a, b = returning()
+print (a, b)
