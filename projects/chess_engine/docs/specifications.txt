@@ -1,0 +1,68 @@
+Chess game:
+  1. Goals
+
+  The end goal is to create a small platform on which one can play chess with
+  friends. To do that the project needs a few basic things:
+      - chess game - an engine that allows you to move pieces and see the state
+of the board.
+      - logging system - this is a section that needs to be researched, but the
+basics are that we are going to need to comunicate with a database of users that
+want to play the game.
+      - code visualization - an interesting idea that can be used during interviews
+      - flask/jango - use of common frameworks for the creation of a web interface
+
+  2. Steps
+
+  The steps that will be taken to achieve the wanted outcome.
+      - build the engine
+      - create the web interface
+      - setup hosting for the project - so it can be accessed during interviews
+      - setup a small DB (not really sure if it will be needed)
+      - containerize the app and make it destributable
+      - create a vizualization section that will be present when interviewing
+
+This file is the begining of this project and will focus on the game engine
+
+Structure
+	class Engine
+	class Piece:
+	|_ class Pawn
+	|_ class Knight
+	|_ class Bishop
+	|_ class Rook
+	|_ class Queen
+	|_ class King
+	class Board
+
+Functions
+
+	class Engine:
+	  - start()       - start a new game with all needed pieces, intiate a
+									 new board 
+	  - start_pos()   - start from a given position - useful for puzzles
+	
+	class Piece:
+	  *_file          - the x coordinates of the object (between a and h)
+	  *_rank          - the y coordinates of the object (between 1 and 8)
+	  *COLOR          - enum value that shows a piece's color
+	  - location()    - get the location of the piece; returns the coordinates
+	of the piece
+	  - check_move()  - check for legal moves; returns the coordinates of the 
+	legal moves
+	  - move()        - change the coordinates based on legal moves
+	
+	class Board:
+	  *ID             - identification number of the board - make it a hash
+						  value to experiment with hashes?
+	  *pieces         - create all pieces as objects and ues the variables
+									 as a way
+	to communicate with them
+	  - read_chess()  - extract all information from chess notations (remember to
+	to turn all elements of the list in strings - security and failure)
+	  - game_state()  - get the current location of all pieces in the game.
+	  - king_check()  - check if any of the kings are in check; return True 
+									 or False
+	  | - check_moves()   - check if there are any legal moves possible; return
+	a dictionary with possible move {'queen': a7, 'rook': a6} for example; retur
+	end of game signal if no moves are possible to def the king
+	  - end_game()    - ends the game
