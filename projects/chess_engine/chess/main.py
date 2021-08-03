@@ -14,8 +14,9 @@ class Piece():
     COLOR = 'No color'
     valid_files = [ord('a'), ord('b'), ord('c'), 
                         ord('d'), ord('e'), ord('f'),
-                        ord('g'), ord('h')]
-    valid_ranks = [1, 2, 3, 4, 5, 6, 7, 8]
+                        ord('g'), ord('h'), 0]
+    valid_ranks = [1, 2, 3, 4, 5, 6, 7, 8, 0]   # The 0 are used for cases where the possible moves
+                                                # out of the board
 
     # Check the start position to decide which color a piece is
     
@@ -23,7 +24,7 @@ class Piece():
         if ord(file) in self.valid_files:
             return file
         else:
-            return InvalidPieceCharacteristic(
+            raise InvalidPieceCharacteristic(
                              """Non legal value for file given.
                                 Expected a value between 'a' and 'h'.
                                 Given file: {}""".format(file))
@@ -32,7 +33,7 @@ class Piece():
         if  rank in self.valid_ranks:
             return rank
         else:
-            return InvalidPieceCharacteristic(
+            raise InvalidPieceCharacteristic(
                              """Non legal value for rank given.
                                 Expected a value between 1 and 8 respectively.
                                 Given rank: {}""".format(rank))
@@ -49,7 +50,7 @@ class Piece():
         print ('You need to select an actual piece.')
 
     def location(self):
-        return (self.file, self.rank)      # return a tuple ('a', '1')
+        return (self.file, self.rank)      # return a tuple ('a', 1)
 
     def verify_move(self):                     # An empty function to be inherited
         pass 
@@ -104,11 +105,74 @@ class Pawn(Piece):
                 move = [file, rank]
                 valid_moves.append(tuple(move))
         # return a list with the tuples - (file, rank)
-        print (valid_moves)
         return valid_moves
 
 class Knight(Piece):
-    pass
+    
+    def __init__(self, file, rank, color):
+        self.file = self.verify_file(file)
+        self.rank = self.verify_rank(rank)
+        self.COLOR = self.verify_color(color)
+    
+    def front_back_moves(self):
+        try:
+            valid_rank_up = self.verify_rank(self.rank + 2)
+        except InvalidPieceCharacteristic:
+            valid_rank_up = 0        
+        try:
+            valid_rank_down = self.verify_rank(self.rank - 2)
+        except InvalidPieceCharacteristic:
+            valid_rank_down = 0
+
+        try:
+            valid_file_right = self.verify_file(chr(ord(self.file) + 1))
+        except InvalidPieceCharacteristic:
+            valid_file_right = 0
+        try:
+            valid_file_left = self.verify_file(chr(ord(self.file) - 1))
+        except InvalidPieceCharacteristic:
+            valid_file_left = 0
+
+        valid_move_fl = (valid_file_left, valid_rank_up)
+        valid_move_fr = (valid_file_right, valid_rank_up)
+        valid_move_bl = (valid_file_left, valid_rank_down)
+        valid_move_br = (valid_file_right, valid_rank_down)
+        return [valid_move_fl, valid_move_fr, valid_move_bl, valid_move_br]
+
+    def left_right_moves(self):
+        try:
+           valid_file_left = self.verify_file(chr(ord(self.file) - 2))
+        except InvalidPieceCharacteristic:
+           valid_file_left = 0
+        try:
+           valid_file_right = self.verify_file(chr(ord(self.file) + 2))
+        except InvalidPieceCharacteristic:
+           valid_file_right = 0
+        
+        try:
+            valid_rank_up = self.verify_rank(self.rank + 1)
+        except InvalidPieceCharacteristic:
+            valid_rank_up = 0
+        try:
+            valid_rank_down = self.verify_rank(self.rank - 1)
+        except InvalidPieceCharacteristic:
+            valid_rank_down = 0
+
+        valid_move_lu = (valid_file_left, valid_rank_up)
+        valid_move_ld = (valid_file_left, valid_rank_down)
+        valid_move_ru = (valid_file_right, valid_rank_up)
+        valid_move_rd = (valid_file_right, valid_rank_down)
+        return [valid_move_lu, valid_move_ld, valid_move_ru, valid_move_rd]
+
+    def verify_move(self):
+        valid_moves = []
+        for move in self.front_back_moves():
+            valid_moves.append(move)
+        for move in self.left_right_moves():
+            valid_moves.append(move)
+        # clean the list of valid moves from 0 values
+        valid_moves = [move for move in valid_moves if 0 not in move]
+        return valid_moves
 
 class Bishop(Piece):
     pass
@@ -127,10 +191,3 @@ class Board():
 
 
 
-pawn = Pawn(file = 'a', rank = 2, color = 'white')
-print (pawn.COLOR, pawn.file, pawn.rank)
-move = ('a', 4)
-pawn.move(move)
-print ("Successful move!")
-move = ('b', 5)
-pawn.move(move)
