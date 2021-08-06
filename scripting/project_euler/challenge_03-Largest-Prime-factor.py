@@ -3,24 +3,59 @@
 
 from math import sqrt
 
-primes = [2, ]  # We start from the first prime - 2
+def smallest_divisors(num):
+    # Let's say each num can represented by only 2 multipliers : -> num is prime
+    # num = dev_1 * dev_2, but let's take dev_1 < dev_2: -> dev_1: small and dev_2: big
 
-def is_prime(num):
-    for prime in primes:
-        if num % prime == 0 and prime != 1:
-            return False
-        else:
-            continue
-    if num > 1:
-        primes.append(num)
-    return True
+    small = 2 # the smallest possible devisor is 2
+    i = 0
+    while i < num // 2:         # No point in checking after the half point - basically after this point
+                                # you cannot multiply by even the smallest prime to get num
 
-def prime_factors_of(number):
-    primes = [num for num in range(int(sqrt(number) // 1)) if is_prime(num) and number % num == 0 and num != 1]
-    # primes = [num for num in range(number) if is_prime(num) and number % num == 0 and num != 1]
-    return primes
+        big = int(num / small)  # We define it here, because we want it to change value based on small
+                                # based on small, which we change in the same loop
+        if small * big == num:
+            return small        # We check if small is a divisor essentially, because if small*big != num
+                                # then num % small != 0
+        i += 1
+        small +=1
+    
+    return num                  # If we haven't found a divisor this means that num is prime 
 
-print (prime_factors_of(13195))
-# print (prime_factors_of(600851475143))
-# Need help with the optimization of the program. It works for
-# small numbers, but the one given is too big
+# A more optimized version
+def smallest_divisors(N):
+    if N % 2 == 0:              # Removes the need for us to check with even divisors
+        return 2
+    small = 3
+    while small < int(N/small):
+        if small * int(N/small) == N:
+            return small
+        
+        small += 2              # We can now increment 2x faster
+    return N
+
+def smallest_divisors(n):
+    if n % 2 == 0:
+        return 2
+    small = 3
+    while small < sqrt(n):      # small < N/small -> small*small < N -> small < sqrt(N)
+        if small * int(n/small) == n:
+            return small
+        small += 2
+    return n
+
+def all_divisors(num):
+    all_divisors = []
+    
+    while num > 1:
+        all_divisors.append(smallest_divisors(num))
+        num = num / smallest_divisors(num)
+
+    return all_divisors
+
+print (smallest_divisors(13195))
+print (all_divisors(13195))
+print (max(all_divisors(13195)))
+print (max(all_divisors(600851475143)))
+
+
