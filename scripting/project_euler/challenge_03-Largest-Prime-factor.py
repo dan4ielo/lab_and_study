@@ -27,7 +27,7 @@ def smallest_divisors(N):
     if N % 2 == 0:              # Removes the need for us to check with even divisors
         return 2
     small = 3
-    while small < int(N/small):
+    while small <= int(N/small):
         if small * int(N/small) == N:
             return small
         
@@ -38,7 +38,7 @@ def smallest_divisors(n):
     if n % 2 == 0:
         return 2
     small = 3
-    while small < sqrt(n):      # small < N/small -> small*small < N -> small < sqrt(N)
+    while small <= sqrt(n):      # small < N/small -> small*small < N -> small < sqrt(N)
         if small * int(n/small) == n:
             return small
         small += 2
