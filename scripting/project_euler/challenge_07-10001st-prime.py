@@ -1,3 +1,9 @@
+# A quick update. If you use the formula f(n) = n*log(n) you will be able to reach the nth prime
+# really quickly. The idea is that graphically, f(n) is really close to the distribution of primes
+
+# check: https://stemhash.com/how-to-find-the-nth-prime-number/
+# watch: https://www.youtube.com/watch?v=hYxBH1YY9z4  -  min 20:00
+
 # By listing the first six primes: 2, 3, 5, 7, 11 and 13, we ca see that the 6h prime is 13.
 # What is the 10 001st prime?
 
