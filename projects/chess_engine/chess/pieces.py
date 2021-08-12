@@ -1,7 +1,6 @@
 class Piece():
     file = 0                               # between a and h
-    rank = 0                               # between 1 and 8
-    COLOR = 'No color'
+    rank = 0                               # between 1 and 8 COLOR = 'No color'
     valid_files = [ord('a'), ord('b'), ord('c'), 
                         ord('d'), ord('e'), ord('f'),
                         ord('g'), ord('h'), 0]
@@ -40,9 +39,9 @@ class Piece():
         print ('You need to select an actual piece.')
 
     def location(self):
-        return (self.file, self.rank)      # return a tuple ('a', 1)
+        return (self.file, self.rank)           # return a tuple ('a', 1)
 
-    def verify_move(self):                     # An empty function to be inherited
+    def verify_move(self):                      # An empty function to be inherited
         pass 
 
     def move(self, target):                     # Move the piece at the target square 
@@ -165,13 +164,181 @@ class Knight(Piece):
         return valid_moves
 
 class Bishop(Piece):
-    pass
+    
+    def __init__(self, file, rank, color):
+        self.file = self.verify_file(file)
+        self.rank = self.verify_rank(rank)
+        self.COLOR = self.verify_color(color)
+    
+    def left_down(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while ord(file) in self.valid_files and rank in self.valid_ranks:
+            move = (file, rank)
+            file = chr(ord(file) - 1)
+            rank -= 1
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+
+    def left_up(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while ord(file) in self.valid_files and rank in self.valid_ranks:
+            move = (file, rank)
+            file = chr(ord(file) - 1)
+            rank += 1
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+
+    def right_up(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while ord(file) in self.valid_files and rank in self.valid_ranks:
+            move = (file, rank)
+            file = chr(ord(file) + 1)
+            rank += 1
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+    
+    def right_down(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while ord(file) in self.valid_files and rank in self.valid_ranks:
+            move = (file, rank)
+            file = chr(ord(file) + 1)
+            rank -= 1
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+
+    def diagonals(self):
+        moves = []
+        for move in self.left_up():
+            moves.append(move)
+        for move in self.left_down():
+            moves.append(move)
+        for move in self.right_up():
+            moves.append(move)
+        for move in self.right_down():
+            moves.append(move)
+        moves = list(set(moves))
+        return moves
+
+    def verify_move(self):
+        valid_moves = []
+        for move in self.diagonals():
+            self.verify_file(move[0])
+            self.verify_rank(move[1])
+            valid_moves.append(move)
+        return valid_moves
 
 class Rook(Piece):
-    pass
+    
+    def __init__(self, file, rank, color):
+        self.file = self.verify_file(file)
+        self.rank = self.verify_rank(rank)
+        self.COLOR = self.verify_color(color)
+    
+    def left(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while ord(file) in self.valid_files:
+            move = (file, rank)
+            file = chr(ord(file) - 1)
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
 
-class Queen(Piece):
-    pass
+    def up(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while rank in self.valid_ranks:
+            move = (file, rank)
+            rank += 1
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+
+    def right(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while ord(file) in self.valid_files:
+            move = (file, rank)
+            file = chr(ord(file) + 1)
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+    
+    def down(self):
+        moves = []
+        file = self.file
+        rank = self.rank
+        while rank in self.valid_ranks:
+            move = (file, rank)
+            rank -= 1
+            moves.append(move)
+        moves = [move for move in moves if 0 not in move]
+        return moves
+
+    def ranks_and_files(self):
+        moves = []
+        for move in self.left():
+            moves.append(move)
+        for move in self.down():
+            moves.append(move)
+        for move in self.up():
+            moves.append(move)
+        for move in self.right():
+            moves.append(move)
+        moves = list(set(moves))
+        return moves
+
+    def verify_move(self):
+        valid_moves = []
+        for move in self.ranks_and_files():
+            self.verify_file(move[0])
+            self.verify_rank(move[1])
+            valid_moves.append(move)
+        return valid_moves
+
+class Queen(Piece, Rook, Bishop):
+    
+    def __init__(self, file, rank, color):
+        self.file = Piece.verify_file(file)
+        self.rank = Piece.verify_rank(rank)
+        self.COLOR = Piece.verify_color(color)
+    
+    def verify_move(self):
+        pass
 
 class King(Piece):
+    
+    def __init__(self, file, rank, color):
+        self.file = self.verify_file(file)
+        self.rank = self.verify_rank(rank)
+        self.COLOR = self.verify_color(color)
+    
+    def verify_move(self):
+        pass
+
+if __name__ == '__main__':
+
+    # insert code here
     pass
+
+
+if __name__ == '__main__':
+    bishop = Bishop('f', 4, 'white')
+    print (bishop.verify_move())
+    rook = Rook('f', 4, 'white')
+    print (rook.verify_move())
