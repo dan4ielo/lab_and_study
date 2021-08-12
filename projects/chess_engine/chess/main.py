@@ -1,8 +1,4 @@
-class InvalidMove(Exception):
-    pass
-
-class InvalidPieceCharacteristic(Exception):
-    pass
+from custom_errors import *
 
 class Engine():
     def start():
