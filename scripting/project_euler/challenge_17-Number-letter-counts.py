@@ -139,10 +139,10 @@ def letter_count(string):
     # print(string)
     return len(string)
 
-test = input('> ')
+# test = input('> ')
 
-print (num_to_letter(int(test)))
-print (letter_count(num_to_letter(int(test))))
+# print (num_to_letter(int(test)))
+# print (letter_count(num_to_letter(int(test))))
 
 i = 1
 result = 0
