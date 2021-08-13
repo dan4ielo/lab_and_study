@@ -14,12 +14,12 @@
 # We can see that 28 is the first triangle number to have over five divisors
 
 # What is the value of the first triangle number to have over five hundred divisors?
+from timeit import default_timer as timer
 
-#=============== This is not fast enough =====================#
-# O(n) ~ n^2 -> Probably less, but definetly far from O(n) = n
 LIMIT = 1 * 1000 # * 1000
 ignore = 1 # * 1000 * 1000
 def gen_tri_num():
+    '''genrate triangle numbers'''
     tri_num = 0
     naturals = [num for num in range(LIMIT)]
     index = 0
@@ -29,11 +29,47 @@ def gen_tri_num():
         tri_num = tri_num + num
         yield tri_num
 
+def factors(num):
+    factors = [1, ]
+    even_factors = []
+    uneven_factors = []
+    n = num
+    if num == 0:return []
+    if num == 1:return factors
+    even_power = 1
+    while num % 2 == 0:
+        num = int(num / 2)
+        factors.append(2**even_power)
+        even_factors.append(2**even_power)
+        even_power += 1
+    uneven_factor = 3
+    while uneven_factor <= n:
+        if uneven_factor * int(n/uneven_factor) == n:
+            factors.append(uneven_factor)
+            uneven_factors.append(uneven_factor)
+        uneven_factor += 2
+    for even in even_factors:
+        for uneven in uneven_factors:
+            factors.append(even * uneven)
+    return factors
+
+gen = gen_tri_num()
+tri_num = next(gen)
+start = timer()
+#while len(factors(tri_num)) < 100:
+#    tri_num = next(gen)
+#end = timer()
+
+#print(str(tri_num)+': '+str(len(factors(tri_num))) ) # + ' -> factors: ' + str(factors(tri_num)))
+#print (end - start)
+
+#=============== This is not fast enough =====================#
+# O(n) ~ n^2 -> Probably less, but definetly far from O(n) = n
 # This is extremely slow
 def get_factors(num):
     factors = []
     for i in range(1, num + 1):
-        if num <= ignore: continue
+        if num <= 1: continue
         if num % i == 0:
             factors.append(i)
     return factors
@@ -47,22 +83,26 @@ def get_factors(num):
 
 gen = gen_tri_num()
 tri_num = next(gen)
-while len(get_factors(tri_num)) < 5:
+start = timer()
+while len(get_factors(tri_num)) < 100:
     tri_num = next(gen)
+end = timer()
 
-print(str(tri_num)+': '+str(len(get_factors(tri_num))))
-
+print(str(tri_num)+': '+str(len(get_factors(tri_num))) ) # + ' -> factors: ' + str(get_factors(tri_num)))
+print (end - start)
 
 # A faster way would be to check by which promes is the num divisible
 # and then calculate the number of divisors based on combinatorics
 
 #================= Pfffffff, this is even slower :/ ===============#
 # O(n) ~ log(n) -> for the prime factorization
-# O(n) ~ n^n -- xD - this should be a thing right? -> basically for each n we call a lot of combinations that need to be checked
+# O(n) ~ n^n -- xD - this should be a thing right? -> basically for each n we call a lot of combinations need to be checked
+
 from math import sqrt
 from itertools import combinations
 
 def the_prime_way(num):
+    '''Gives all prime factors plus all factors that a power of 2'''
     factors = [1, ]
     n = num
     if num == 0:return []
@@ -107,11 +147,11 @@ def combination(_list):
 gen = gen_tri_num()
 value = next(gen)
 
-print (the_prime_way(28))
-print (combination(the_prime_way(28)))
-print (value)
+# print (the_prime_way(28))
+# print (combination(the_prime_way(28)))
+# print (value)
 
-#while combination(the_prime_way(value)) < 50:
+#while combination(the_prime_way(value)) < 100:
 #    value = next(gen)
 #    combinations = combination(the_prime_way(value))
 #print (str(value) + ': ' + str(combination(the_prime_way(value))))# + str(factors) + str(len_factors))
