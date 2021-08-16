@@ -1,0 +1,8 @@
+Pieces API is now complete
+
+What is left is to create tests for the software and see if there are going to be bugs.
+It is imperative to check edge cases such as pieces being on the edge of the board and
+or movement in one place. 
+
+Build the board in terminal and see if you can display all legal moves for each piece. 
+If successful, start building the actual GUI of the project.
