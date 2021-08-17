@@ -4,3 +4,6 @@
 # poluinvarianti
 
 # mihail.minkov.bg@gmail.com
+
+Ask Misho to look at the exception handling in the chess app. He might
+give some good guidance. 
