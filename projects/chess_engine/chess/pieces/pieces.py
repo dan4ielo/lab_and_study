@@ -1,6 +1,7 @@
-from chess.pieces.movement import *
-from chess.custom_errors.errors import *
-#from movement import *
+#from chess.pieces.movement import *
+#from chess.custom_errors.errors import *
+from pieces.movement import *
+from custom_errors.errors import *
 
 class Piece():
     file = 0                               # between a and h
@@ -192,7 +193,7 @@ if __name__ == '__main__':
 #    bishop = Bishop('f', 4, 'white')
 #    print (bishop.verify_move())
 
-    rook = Rook('a', 1, 'white')
+    rook = Rook  ('a', 1, 'white')
     print (rook.verify_move())
 
 #    queen = Queen('f', 4, 'white')

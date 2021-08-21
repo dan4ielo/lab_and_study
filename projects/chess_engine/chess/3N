@@ -2,8 +2,7 @@
 class SetupError(Exception):
     pass
 
-class UndefinedGame(SetupError):
-    pass
+class 
 
 # Errors that are raised during gameplay
 class GameError(Exception):
