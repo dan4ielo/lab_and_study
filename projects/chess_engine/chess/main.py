@@ -3,21 +3,23 @@ from pieces.pieces import *
 from pprint import pprint
 
 class Board():
-    self.start_pos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-    self.ranks = [_ for _ in range(1, 9)] 
-    self.board = self.gen_board()
+    start_pos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+    ranks = [_ for _ in range(1, 9)] 
 
     def __init__(self, position = '', new_game = True):
         self.files = [chr(i + 96) for i in range(1, 9)]
+        self.board = self.gen_board()
         
         if new_game: piece_coordinates = self.read(self.start_pos)
         else: piece_coordinates = self.read(position)        
-        pieces_to_board(piece_coordinates)
+        # __init__ all pieces
+        self.board = self.pieces_to_board(piece_coordinates)
     
     def pieces_to_board(self, obj_dict):
         for key in obj_dict: # key = 'a1'
             self.board[key] = obj_dict[key]
-        
+        return self.board        
+
     # Generate a board
     def gen_board(self):
         '''
@@ -36,10 +38,12 @@ class Board():
                 board[key] = None
         return board
 
+    # Read Fen notation
     def read(self, string):
         '''
         Reads the FEN transcript of the starting position
         '''
+        starting_pieces = {}
         # TBD what will be done with these variables
         # next_move = self.next_move(fen[1])
         # next_move = fen[1] # 'white' or 'black'
@@ -49,31 +53,38 @@ class Board():
         # moves = fen[5]     # how many hole moves have been made
         fen = string.split()
         board_state = fen[0].split('/')
-        piece_coordinates = self.state_to_obj(board_state, piece_coordinates)
-        return piece_coordinates
+        starting_pieces = self.state_to_obj(board_state, starting_pieces)
+        return starting_pieces
 
     # Convert Fen to a dict of objects
-    def state_to_obj(fen, obj_dict):
+    def state_to_obj(self, fen, obj_dict):
         # Fen comes in the following form: [rnbqkbnr,pppppppp,8,8,8,8,PPPPPPPP,RNBQKBNR]
         actual_rank = 8
+        tmp_dict = {}
         for rank in range(0, len(fen)): # values for rank - 1 to 8; actual based on notaion - 8 to 1
-            parse_string_notation(fen[rank], actual_rank)
+            tmp_dict = self.parse_string_notation(fen[rank], actual_rank)
+            obj_dict = {**obj_dict, **tmp_dict} # Merge the dicts
             actual_rank -= 1
         return obj_dict
-
-    def parse_string_notation(string, rank):
-        on_rank = []
+    
+    def parse_string_notation(self, string, rank):
+        on_rank = {}
         tmp_file = 'a'
         for letter in string:
-            if letter.isdecimal(): 
-                for i in range(1, int(letter)):
-                    on_rank.append(None)
+            loc = tmp_file + str(rank)
+            if letter.isdecimal():
+                for i in range(1, int(letter) + 1):
+                    #on_rank.append(None)
+                    loc = tmp_file + str(rank)
+                    on_rank[loc] = None
                     tmp_file = chr(ord(tmp_file) + 1)
             elif letter.isalpha():
-                on_rank.append(transcribe(letter, tmp_file, rank))
+                #on_rank.append(self.transcribe(letter, tmp_file, rank))
+                on_rank[loc] = self.transcribe(letter, tmp_file, rank)
                 tmp_file = chr(ord(tmp_file) + 1)
         return on_rank
 
+    @staticmethod
     def transcribe(key, file, rank):
         tmp_file = file
         tmp_rank = rank
@@ -118,7 +129,4 @@ class Engine():
 
 if __name__ == '__main__':
 
-    puzzle = 'a2w a3b Bb3w Kd3w e3w h3w Rb4b g4w Ke5b Ra6w Bb6b e6b g6b h6b' # Check the daily puzzle on chess.com
-
-    b = Board(start)
-    # pprint (b.board) # It actually worked xD heh kek :D
+    b = Board()
