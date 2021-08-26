@@ -10,15 +10,16 @@ class Board():
         self.files = [chr(i + 96) for i in range(1, 9)]
         self.board = self.gen_board()
         
+        # Setup
         if new_game: piece_coordinates = self.read(self.start_pos)
         else: piece_coordinates = self.read(position)        
         # __init__ all pieces
-        self.board = self.pieces_to_board(piece_coordinates)
-    
+        self.pieces_to_board(piece_coordinates)
+
+    # Setup
     def pieces_to_board(self, obj_dict):
         for key in obj_dict: # key = 'a1'
             self.board[key] = obj_dict[key]
-        return self.board        
 
     # Generate a board
     def gen_board(self):
@@ -116,6 +117,18 @@ class Board():
         else:
             self.__init__(position = position, new_game = False)
 
+    # Gameplay
+    def select(self, loc):
+        if self.board[loc] != None:
+            return self.board[loc] # Return the object
+        else: 
+            raise SelectionError("You are trying to select an empty square")
+
+    def move(self, current, target):
+        this = self.select(current)
+        this.move(target)
+        # Make the pieces work with strings as well
+
 class Engine():
 
     def start():
@@ -130,3 +143,4 @@ class Engine():
 if __name__ == '__main__':
 
     b = Board()
+    print (b.board)

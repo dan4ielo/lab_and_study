@@ -6,10 +6,16 @@ class UndefinedGame(SetupError):
     pass
 
 # Errors that are raised during gameplay
-class GameError(Exception):
+class GameplayError(Exception):
     pass
 
-class InvalidMove(GameError):
+class SelectionError(GameplayError):
+    pass
+
+class InvalidMove(GameplayError):
+    pass
+
+class InvalidTargetDeclaration(InvalidMove):
     pass
 
 # Errors that come from the pieces files.
