@@ -2,6 +2,7 @@ from custom_errors.errors import *
 from pieces.pieces import *
 from pprint import pprint
 
+
 class Board():
     start_pos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     ranks = [_ for _ in range(1, 9)] 
@@ -124,10 +125,20 @@ class Board():
         else: 
             raise SelectionError("You are trying to select an empty square")
 
-    def move(self, current, target):
-        this = self.select(current)
-        this.move(target)
-        # Make the pieces work with strings as well
+    def move(self, current_loc, target_loc):
+        piece = self.select(current_loc)
+        piece.move(target_loc)
+        self.board[target_loc] = piece
+        self.board[current_loc] = None
+        # NOTE1: Next implement what happens when there is a piece on the target square
+        # Remmember that you need to check for the color because you cannot take pieces
+        # from your own color.
+        # NOTE2: Implement a legal check system - a way to validate the piece movements
+        # Maybe through sorting the lists and then removing everything after a certain 
+        # coordinate pair? And we get the coordinate pair from the board
+
+    # GUI
+
 
 class Engine():
 
@@ -143,4 +154,6 @@ class Engine():
 if __name__ == '__main__':
 
     b = Board()
-    print (b.board)
+    #print (b.board)
+    #print (b.move('a2', 'a4')) # This works - YAY
+    #print (b.board)

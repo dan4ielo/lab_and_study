@@ -1,7 +1,7 @@
-from movement import *
+#from movement import *
 #from chess.custom_errors.errors import *
-#from pieces.movement import *
-#from custom_errors.errors import *
+from pieces.movement import *
+from custom_errors.errors import *
 
 class Piece():
     file = 0                               # between a and h
@@ -195,7 +195,7 @@ class King(Piece):
         return valid_moves
 
 if __name__ == '__main__':
-
+    pass
 #    knight = Knight('b', 1, 'white')
 #    print (knight.verify_move())
 
