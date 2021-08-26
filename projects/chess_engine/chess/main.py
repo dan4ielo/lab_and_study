@@ -2,6 +2,7 @@ from custom_errors.errors import *
 from pieces.pieces import *
 from pprint import pprint
 
+
 class Board():
     start_pos = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     ranks = [_ for _ in range(1, 9)] 
@@ -10,15 +11,16 @@ class Board():
         self.files = [chr(i + 96) for i in range(1, 9)]
         self.board = self.gen_board()
         
+        # Setup
         if new_game: piece_coordinates = self.read(self.start_pos)
         else: piece_coordinates = self.read(position)        
         # __init__ all pieces
-        self.board = self.pieces_to_board(piece_coordinates)
-    
+        self.pieces_to_board(piece_coordinates)
+
+    # Setup
     def pieces_to_board(self, obj_dict):
         for key in obj_dict: # key = 'a1'
             self.board[key] = obj_dict[key]
-        return self.board        
 
     # Generate a board
     def gen_board(self):
@@ -116,6 +118,28 @@ class Board():
         else:
             self.__init__(position = position, new_game = False)
 
+    # Gameplay
+    def select(self, loc):
+        if self.board[loc] != None:
+            return self.board[loc] # Return the object
+        else: 
+            raise SelectionError("You are trying to select an empty square")
+
+    def move(self, current_loc, target_loc):
+        piece = self.select(current_loc)
+        piece.move(target_loc)
+        self.board[target_loc] = piece
+        self.board[current_loc] = None
+        # NOTE1: Next implement what happens when there is a piece on the target square
+        # Remmember that you need to check for the color because you cannot take pieces
+        # from your own color.
+        # NOTE2: Implement a legal check system - a way to validate the piece movements
+        # Maybe through sorting the lists and then removing everything after a certain 
+        # coordinate pair? And we get the coordinate pair from the board
+
+    # GUI
+
+
 class Engine():
 
     def start():
@@ -130,3 +154,6 @@ class Engine():
 if __name__ == '__main__':
 
     b = Board()
+    #print (b.board)
+    #print (b.move('a2', 'a4')) # This works - YAY
+    #print (b.board)

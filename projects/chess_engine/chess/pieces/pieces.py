@@ -1,4 +1,4 @@
-#from chess.pieces.movement import *
+#from movement import *
 #from chess.custom_errors.errors import *
 from pieces.movement import *
 from custom_errors.errors import *
@@ -49,7 +49,16 @@ class Piece():
         pass 
 
     def move(self, target):                     # Move the piece at the target square  
-        if target in self.verify_move():
+        if isinstance(target, str):
+            coord_tuple = (target[0], int(target[1]))
+        elif isinstance(target, tuple):
+            coord_tuple = target
+        else: 
+            raise InvalidTargetDeclaration("""
+                The coordinates of the raget 
+                square are not defined correctly
+                """)
+        if coord_tuple in self.verify_move():
             self.file = target[0]
             self.rank = target[1]
             return (self.file, self.rank)
@@ -186,16 +195,16 @@ class King(Piece):
         return valid_moves
 
 if __name__ == '__main__':
-
+    pass
 #    knight = Knight('b', 1, 'white')
 #    print (knight.verify_move())
 
 #    bishop = Bishop('f', 4, 'white')
 #    print (bishop.verify_move())
 
-    rook = Rook  ('a', 1, 'white')
-    print (rook.verify_move())
-
+#    rook = Rook  ('a', 1, 'white')
+#    print (rook.verify_move())
+#    print (rook.move('a8'))
 #    queen = Queen('f', 4, 'white')
 #    print (queen.verify_move())
 
