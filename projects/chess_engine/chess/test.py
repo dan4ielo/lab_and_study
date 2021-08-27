@@ -37,18 +37,18 @@
 #            'h2':Pawn('h', 2, 'black'), 
 #}
     
-def def_piece(letter):
-    if str(letter) == 'r':
-        return '__Rook__'
-    else: return None
+#def def_piece(letter):
+    #if str(letter) == 'r':
+        #return '__Rook__'
+    #else: return None
 
-board = {}
-files = [chr(i + 96) for i in range(1, 9)]
-ranks = [_ for _ in range(1, 9)]
-for f in files:
-    for r in ranks:
-        key = f + str(r)
-        board[key] = None
+#board = {}
+#files = [chr(i + 96) for i in range(1, 9)]
+#ranks = [_ for _ in range(1, 9)]
+#for f in files:
+    #for r in ranks:
+        #key = f + str(r)
+        #board[key] = None
 
 # example = 'rnbqkbnr/pppppppp/88888888/88888888/88888888/88888888/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 # string = example.split() 
@@ -66,55 +66,60 @@ for f in files:
 #     i += 1
 # print (board) 
 
-def state_to_obj(fen, obj_dict):
+#def state_to_obj(fen, obj_dict):
     # Fen comes in the following form: [rnbqkbnr,pppppppp,8,8,8,8,PPPPPPPP,RNBQKBNR]
-    actual_rank = 8
-    for rank in range(0, len(fen)): # values for rank - 1 to 8; actual based on notaion - 8 to 1
-        parse_string_notation(fen[rank], actual_rank)
-        actual_rank -= 1
-    return obj_dict
+    #actual_rank = 8
+    #for rank in range(0, len(fen)): # values for rank - 1 to 8; actual based on notaion - 8 to 1
+        #parse_string_notation(fen[rank], actual_rank)
+        #actual_rank -= 1
+    #return obj_dict
 
 # A really dumb way to make thing dynamic is to use globals. Essentially I don't know why 
 # it's dumb, but smarter people say it is so I guess I will go with I am a noob :D
-def parse_string_notation(string, rank):
-    on_rank = []
-    tmp_file = 'a'
-    for letter in string:
-        if letter.isdecimal(): 
-            for i in range(1, int(letter)):
-                on_rank.append(None)
-                tmp_file = chr(ord(tmp_file) + 1)
-        elif letter.isalpha():
-            # global tmp_file = 
-            # global tmp_rank = 
-            on_rank.append(transcribe(letter, tmp_file, rank))
-            tmp_file = chr(ord(tmp_file) + 1)
-    print (on_rank)
-    return on_rank
 
-def transcribe(key, file, rank):
-    tmp_file = file
-    tmp_rank = rank
-    transcript = {
-        'p': '__Pawn__.{}{}'.format(tmp_file, tmp_rank),
-        'P': '__Pawn__.{}{}'.format(tmp_file, tmp_rank),
-        'r': '__Rook__.{}{}'.format(tmp_file, tmp_rank),
-        'R': '__Rook__.{}{}'.format(tmp_file, tmp_rank),
-        'n': '__Knight__.{}{}'.format(tmp_file, tmp_rank),
-        'N': '__Knight__.{}{}'.format(tmp_file, tmp_rank),
-        'b': '__Bishop__.{}{}'.format(tmp_file, tmp_rank),
-        'B': '__Bishop__.{}{}'.format(tmp_file, tmp_rank),
-        'q': '__Queen__.{}{}'.format(tmp_file, tmp_rank),
-        'Q': '__Queen__.{}{}'.format(tmp_file, tmp_rank),
-        'k': '__King__.{}{}'.format(tmp_file, tmp_rank),
-        'K': '__King__.{}{}'.format(tmp_file, tmp_rank),
-    }
-    return transcript[key]
+#def parse_string_notation(string, rank):
+    #on_rank = []
+    #tmp_file = 'a'
+    #for letter in string:
+        #if letter.isdecimal(): 
+            #for i in range(1, int(letter)):
+                #on_rank.append(None)
+                #tmp_file = chr(ord(tmp_file) + 1)
+        #elif letter.isalpha():
+            ## global tmp_file = 
+            ## global tmp_rank = 
+            #on_rank.append(transcribe(letter, tmp_file, rank))
+            #tmp_file = chr(ord(tmp_file) + 1)
+    #print (on_rank)
+    #return on_rank
+
+#def transcribe(key, file, rank):
+    #tmp_file = file
+    #tmp_rank = rank
+    #transcript = {
+        #'p': '__Pawn__.{}{}'.format(tmp_file, tmp_rank),
+        #'P': '__Pawn__.{}{}'.format(tmp_file, tmp_rank),
+        #'r': '__Rook__.{}{}'.format(tmp_file, tmp_rank),
+        #'R': '__Rook__.{}{}'.format(tmp_file, tmp_rank),
+        #'n': '__Knight__.{}{}'.format(tmp_file, tmp_rank),
+        #'N': '__Knight__.{}{}'.format(tmp_file, tmp_rank),
+        #'b': '__Bishop__.{}{}'.format(tmp_file, tmp_rank),
+        #'B': '__Bishop__.{}{}'.format(tmp_file, tmp_rank),
+        #'q': '__Queen__.{}{}'.format(tmp_file, tmp_rank),
+        #'Q': '__Queen__.{}{}'.format(tmp_file, tmp_rank),
+        #'k': '__King__.{}{}'.format(tmp_file, tmp_rank),
+        #'K': '__King__.{}{}'.format(tmp_file, tmp_rank),
+    #}
+    #return transcript[key]
     
 
-dic = {}
-example = 'rnbqkbnr/ppp1pppp/3p4/8/4P3/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-string = example.split() 
-setup = string[0].split('/') # [rnbqkbnr pppppppp 8 8 8 8 PPPPPPPP RNBQKBNR]
+#dic = {}
+#example = 'rnbqkbnr/ppp1pppp/3p4/8/4P3/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+#string = example.split() 
+#setup = string[0].split('/') # [rnbqkbnr pppppppp 8 8 8 8 PPPPPPPP RNBQKBNR]
 
-print (state_to_obj(setup, dic))
+#print (state_to_obj(setup, dic))
+
+# GUI development
+from tkinter
+tkinter._test()

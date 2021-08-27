@@ -1,0 +1,87 @@
+What is a class?
+How class relates to type?
+How to define new classes
+Instance methods
+- Adding to classes
+- The self argument
+Initializers
+- Compare and contrast with constructors
+- Establish and enforce invariants
+Collaborating classes
+Decomposing problems
+Separating interface and implementation
+Combine programing paradigms
+Normal typing and duck typing
+Inheritance
+
+Classes 
+Define the structure and behavior of objects
+Act as a template for creating new objects
+Classes control an objects initial state, attributes and methods
+
+-- OOB --
+Classes can make complex problems tractable
+But they can make simple problems unnecessarily complex.
+Python lets you strike the right balance betwen functions and classes
+
+Methods
+Methods are functions defined within the class. They are used for
+operations with the objects that are created by the class.
+- __init__():
+    the __init__ method is used for initializing a new object instance 
+    from the class. If provided the initialize method is called as part
+    of the process of creating a new object when we call the constructor
+    The initialize method MUST be called with the dunder method - __init__
+    
+    NOTE: __init__() is an initializer, not a constructor. In JAVA and C 
+    classes have constructors that are called during the creation of an 
+    object - the constructor. In Python, however, __init__ is called at
+    a point at which the object is already created and is just configuring
+    the already exsisting object. 
+    NOTE: self is the analog to this in JAVA, C# or C++.
+
+Class Invariants
+Invariants are a way to store truths about an object the endure for its
+lifetime. 
+
+The Law of Demeter
+The law of Demeter is a disign principle that says you should never call
+methods on objects you receiced from other calls, or put another way:
+'Only talk to your friends'
+
+OOB design principle - Tell! Don't ask
+Tell other objects what to do instead of asking them their state and 
+responding to it. -- check the boarding_card_printer function in the
+airtravel.py file
+
+Polymorphism
+Polymorphism is a language feature that allows us to use objects of 
+different types through a uniform interface. The concept of Polymorphism
+applies to functions and more complex objects. An example of Polymorphism 
+is the card printer function in the airtravel.py file. The make_boarding_card()
+doesn't need to know about the types of its' arguments, just their order.
+
+Any other object that fit the interface would work in place of console_card_printer()
+Polymorphism in Python is achieved through Duck Typing. Named after the duck
+test by James Riley: 
+"When I see a bird taht walks like a duck and swims like a duck and quacks
+like a duck, I call that bird a duck"
+
+Duck typing means that an object's fitness for a particular use is only 
+determined at runtime and is the cornerstone of Python's object system.
+This is in contrast to statically typed languages, where the compiler
+determines if an object can be used. In particular it means that an object's
+suitability is not based on inheritance hierarchies, bse classes, or anything
+except the attribute an object has at the time of use.
+
+Inheritance
+Inheritence is a mechanism whereby one class - the sub class, can be derived from
+another class - the base class, allowing us to make the object's behavior more
+specific in the sub class
+In nominally-typed languages (Java) the use of inheritance is the means by which
+Polymorphism is achieved.
+As mentioned above, however, Python is not the same as it uses 'Late Binding'. This
+means that we can try any method on any object if the object 'fits'.
+
+Inheritance in Python is primarily useful for sharing implemetnation between
+classes, although it can also be used as a way to achieve Polymorphism.
