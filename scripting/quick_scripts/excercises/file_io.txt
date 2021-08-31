@@ -1,0 +1,77 @@
+File I/O - that is reading and writing files is at the heart of
+many programs. To that end Python provides a wide support for 
+working with bith binary and text files, with mechanisms for doing
+everything from reading a specific byte in a file, iterating over
+lines of text. Files are just one example of objects representing
+resources. Resources are elements of a program that should be released
+or closed after use. 
+Managing resources is critical for proper functioning of a program,
+Python provides special syntax and protocos for manging resources. 
+
+Things that will be covered in the module:
+ 1. Core functions for opening files
+ 2. Text vs. binary mode
+ 3. Read and write files
+ 4. Explicit closing of a file
+ 5. Managing resources with context managers
+ 6. The with keyword dor using context managers
+ 7. With-blocks for running code that uses resources
+ 8. Using Python to work with binary file formats
+ 9. The abstraction of file-like objects
+ 10. Tools for creating context managers
+
+The open() function
+Open a file for reading or writing
+file: path to the file (required)
+mode: read, write, or append, plus binary or text
+encoding: encoding to use in text mode
+
+At the file system level, files contain only series of bytes. Python
+distinguishes between files openned in binary or in text mode even when
+the underlying operating system doesn't. Files opened in binary mode 
+return and manipulate their contenets as bytes objects without any decoding.
+Binary mode reflects the raw data in the file. A file opened in text mode
+treats its contents as if it contains text strings of the str() type, 
+the raw bytes having been decoded, using the platform-dependent encoding 
+or using the specified encoding if given. By default text mode files also 
+engage support for Python's universal new lines. This causes translation
+between a portable single new line character in our program strings (/n),
+in a platform-dependent new line representation of the raw bytes stored in 
+the file system; for example carriage return, new line (/r/n) on Windows.
+
+# here I need to talk about file objects
+
+Typically, when working with file objects we follow the same pattern.
+    open(file)
+    # work with file
+    close(file)
+This workflow is so common that in python their is a separate construct that
+helps us organise it more neatly - with-block
+
+The with-block is a control flow structure for managing resources. It can be 
+used with any objects - such as files- which support the context-manager protocol
+
+Example: Why we use with-blocks
+
+# The with expression
+with EXPR as VAR:
+    BLOCK
+
+# Without the with expression and prepared for reliability
+mgr = (EXPR)
+    exit = type(mgr).__exit__
+    value = type(mgr).__enter__(mgr)
+    exc = True
+    try:
+        try:
+            VAR = value
+            BLOCK
+        except:
+            exc = False
+            if not exit(mgr, *sys.exc_info()):
+                raise
+    finally:
+        if exc:
+            exit(mgr, None, None, None)
+
+
