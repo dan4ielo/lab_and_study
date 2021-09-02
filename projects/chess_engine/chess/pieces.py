@@ -1,8 +1,6 @@
 """
-Module defining all pieces for the game of chess.
+File defining all pieces for the game of chess.
 """
-#from chess.custom_errors.errors import *
-from pieces.movement import *
 #from custom_errors.errors import *
 
 class Piece():
@@ -160,16 +158,16 @@ class Piece():
     
     def bishop_movement(self, loc):
         moves = []
-        for move in self.left_up(self, loc):
+        for move in self.left_up(loc):
             moves.append(move)
-        for move in self.left_down(self, loc):
+        for move in self.left_down(loc):
             moves.append(move)
-        for move in self.right_up(self, loc):
+        for move in self.right_up(loc):
             moves.append(move)
-        for move in self.right_down(self, loc):
+        for move in self.right_down(loc):
             moves.append(move)
         moves = list(set(moves))
-        moves.remove(self, loc)
+        moves.remove(loc)
         return moves
     
     #========== ROOK & QUEEN movement ==========#
@@ -215,16 +213,16 @@ class Piece():
     
     def rook_movement(self, loc):
         moves = []
-        for move in self.left(self, loc):
+        for move in self.left( loc):
             moves.append(move)
-        for move in self.down(self, loc):
+        for move in self.down(loc):
             moves.append(move)
-        for move in self.up(self, loc):
+        for move in self.up(loc):
             moves.append(move)
-        for move in self.right(self, loc):
+        for move in self.right(loc):
             moves.append(move)
         moves = list(set(moves))
-        moves.remove(self, loc)
+        moves.remove(loc)
         return moves
     
 
@@ -325,9 +323,9 @@ class Knight(Piece):
     
     def knight_movement(self, loc):
         moves = []
-        for move in self.front_back_moves(self, loc):
+        for move in self.front_back_moves(loc):
             moves.append(move)
-        for move in self.left_right_moves(self, loc):
+        for move in self.left_right_moves(loc):
             moves.append(move)
         return moves
     
@@ -409,13 +407,13 @@ class King(Piece):
             moves.append((chr(ord(file)+1), rank))
             moves.append((chr(ord(file)+1), rank+1))
             moves.append((chr(ord(file)), rank+1))
-        if ord(file) - 1 in valid_files and rank - 1 in valid_ranks:
+        if ord(file) - 1 in self.valid_files and rank - 1 in self.valid_ranks:
             moves.append((chr(ord(file)-1), rank))
             moves.append((chr(ord(file)-1), rank-1))
             moves.append((chr(ord(file)), rank-1))
-        if ord(file) - 1 in valid_files and rank + 1 in valid_ranks:
+        if ord(file) - 1 in self.valid_files and rank + 1 in self.valid_ranks:
             moves.append((chr(ord(file)-1), rank+1))
-        if ord(file) + 1 in valid_files and rank - 1 in valid_ranks:
+        if ord(file) + 1 in self.valid_files and rank - 1 in self.valid_ranks:
             moves.append((chr(ord(file)+1), rank-1))
         return moves
     

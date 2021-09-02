@@ -1,5 +1,5 @@
 from custom_errors.errors import *
-from pieces.pieces import *
+from pieces import *
 from pprint import pprint
 
 
