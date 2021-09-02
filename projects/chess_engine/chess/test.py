@@ -36,7 +36,7 @@
 #            'g2':Pawn('g', 2, 'black'),
 #            'h2':Pawn('h', 2, 'black'), 
 #}
-    
+
 #def def_piece(letter):
 #    if str(letter) == 'r':
 #        return '__Rook__'
