@@ -138,7 +138,7 @@ class Board():
         # coordinate pair? And we get the coordinate pair from the board
 
     # GUI
-    
+        
 
 class Engine():
 
