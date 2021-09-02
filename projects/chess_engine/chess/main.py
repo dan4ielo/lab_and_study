@@ -1,5 +1,5 @@
 from custom_errors.errors import *
-from pieces.pieces import *
+from pieces import *
 from pprint import pprint
 
 
@@ -138,7 +138,7 @@ class Board():
         # coordinate pair? And we get the coordinate pair from the board
 
     # GUI
-
+    
 
 class Engine():
 
