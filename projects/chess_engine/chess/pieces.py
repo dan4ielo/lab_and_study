@@ -7,6 +7,29 @@ class Piece():
     '''
     An abstract class used for defining common
     functions that are used by the pieces.
+<<<<<<< HEAD
+=======
+
+    Methods:
+        __init__(): Initialize a new instance of the Piece class
+                Used for inheritance through the classes
+        location(): Retrieves the current location of the instance
+        
+        Validity control functions:
+            verify_file(): Confirms the given file has a valid value
+            verify_rank(): Confirms the given rank has a valid value
+            verify_color(): Confirms the given color has a valid value
+            verify_move(): Confirms the given move has a valid value.
+                Used for inheritance purposes.
+
+        Movement methods: Methods used for changing the location of
+                instances.
+            move(): Chage the file and rank values of the instance
+            bishop_movement(): Get the valid diagonal movement of the 
+                bishop piece.
+            rook_movement(); Get the valid rank and file movement of
+                the rook piece.
+>>>>>>> chess
     '''
 
     # Common values
@@ -19,7 +42,12 @@ class Piece():
                    ord('d'), ord('e'), ord('f'),
                    ord('g'), ord('h')]
     valid_ranks = [1, 2, 3, 4, 5, 6, 7, 8]
+<<<<<<< HEAD
     
+=======
+   
+    # General use functions
+>>>>>>> chess
     def location(self):
         '''
         Returns the location of the object
@@ -225,9 +253,20 @@ class Piece():
         moves.remove(loc)
         return moves
     
+<<<<<<< HEAD
 
 class Pawn(Piece):
     
+=======
+class Pawn(Piece):
+    '''
+    Class representing the Pawn piece
+
+    Methods:
+        pawn_movement(): Defines the valid moves for the Pawn instances. 
+    '''
+
+>>>>>>> chess
     #========== PAWN movement ==========#
     def pawn_rank_movement(self, loc, color):
         moves = []
@@ -278,6 +317,15 @@ class Pawn(Piece):
         return valid_moves
 
 class Knight(Piece):
+<<<<<<< HEAD
+=======
+    '''
+    Class representing the Knight piece
+    
+    Methods:
+        knight_movement(): Defines the valid moves for the Knight instances
+    '''
+>>>>>>> chess
 
     #========== KNIGHT movement ==========#
     def front_back_moves(self, loc):
@@ -329,6 +377,10 @@ class Knight(Piece):
             moves.append(move)
         return moves
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> chess
     def verify_move(self):
         valid_moves = []
         for move in self.knight_movement(self.location()):
@@ -343,6 +395,12 @@ class Knight(Piece):
         return valid_moves
 
 class Bishop(Piece):
+<<<<<<< HEAD
+=======
+    '''
+    Class representing the Bishop piece
+    '''
+>>>>>>> chess
     
     def verify_move(self):
         valid_moves = []
@@ -358,6 +416,12 @@ class Bishop(Piece):
         return valid_moves
 
 class Rook(Piece):
+<<<<<<< HEAD
+=======
+    '''
+    Class representing the Rook piece
+    '''
+>>>>>>> chess
 
     def verify_move(self):
         valid_moves = []
@@ -373,6 +437,12 @@ class Rook(Piece):
         return valid_moves
 
 class Queen(Piece):
+<<<<<<< HEAD
+=======
+    '''
+    Class representing the Queen piece
+    '''
+>>>>>>> chess
     
     def verify_move(self):
         valid_moves = []
@@ -397,6 +467,15 @@ class Queen(Piece):
         return valid_moves 
 
 class King(Piece):
+<<<<<<< HEAD
+=======
+    '''
+    Class representing the King piece
+
+    Methods:
+        king_movement(): Defines the valid moves for the King instances
+    '''
+>>>>>>> chess
     
     #========== KING movement ==========#
     def king_movement(self, loc):
@@ -431,6 +510,7 @@ class King(Piece):
         return valid_moves
 
 if __name__ == '__main__':
+<<<<<<< HEAD
 #    pass
     knight = Knight('b', 1, 'white')
     print (knight.verify_move())
@@ -447,3 +527,21 @@ if __name__ == '__main__':
 
     king = King('f', 4, 'white')
     print (king.verify_move())
+=======
+    pass
+#    knight = Knight('b', 1, 'white')
+#    print (knight.verify_move())
+#
+#    bishop = Bishop('f', 4, 'white')
+#    print (bishop.verify_move())
+#
+#    rook = Rook  ('a', 1, 'white')
+#    print (rook.verify_move())
+#    print (rook.move('a8'))
+#    
+#    queen = Queen('f', 4, 'white')
+#    print (queen.verify_move())
+#
+#    king = King('f', 4, 'white')
+#    print (king.verify_move())
+>>>>>>> chess
